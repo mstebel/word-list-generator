@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title='addWords')">
+    <title></title>
+</head>
+<body>
+<header th:replace="fragments::header(header= 'Wordlist - add words')"></header>
+<main class="container">
+    <nav th:replace="fragments::nav"></nav>
+    <form method="post" th:action="@{/wordlist}" th:object="${userInput}">
+        <div>
+            <label for="textareainput"><strong>Add new words to create a wordlist</strong></label>
+            <textarea required th:field="*{initialInput}" class="form-control" placeholder="house&#10dog&#10cat&#10..." id="textareainput" style="height: 200px"></textarea>
+        </div>
+        <div th:object="${wordList}">
+            <input type="hidden" th:field="*{id}">
+            <label for="word-list-name"><strong>wordlist name</strong></label>
+            <input required class="form-control" th:field="*{name}" id="word-list-name" type="text" placeholder="holiday vocabulary...">
+        </div>
+        <input value="send" type="submit" class="btn btn-success submit-input">
+    </form>
+</main>
+</body>
+</html>

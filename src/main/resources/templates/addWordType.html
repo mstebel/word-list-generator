@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title='Add wordType')">
+    <meta charset="UTF-8">
+    <title>Strona główna</title>
+</head>
+<body>
+<header th:replace="fragments::header(header= 'Add wordtype')"></header>
+<main class="container">
+    <nav th:replace="fragments::nav"></nav>
+    <form method="post" th:action="@{|/definitions/${entry.id}|}" th:object="${entry}">
+    <table class="table my-table">
+        <thead>
+        <tr>
+            <th scope="col">Word</th>
+            <th scope="col">Word Type</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td  th:text="${entry.word.name}">
+                    <input th:value="${word.id}" type="hidden" th:field="*{word.id}">
+                    <input th:value= "${word.name}" type="hidden" th:field="*{word.name}">
+
+            </td>
+            <td>
+                <div th:each="wordType: ${wordTypes}" class="form-check">
+                        <input th:field="*{word.wordType}" class="form-check-input" type="radio"
+                               name="flexRadioDefault" th:value="${wordType}" id="wordType" th:onclick="submit()">
+                        <label th:text="${wordType}" class="form-check-label" for="wordType"></label>
+                    </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    </form>
+</main>
+</body>
+</html>

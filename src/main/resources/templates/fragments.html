@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pl">
+<html lang="pl"  xmlns:th="http://www.thymeleaf.org">>
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <title th:text = "${title}">wordLists</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+          crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/styles.css" th:href="@{/styles.css}">
+</head>
+<body>
+<header th:fragment="header">
+    <p th:text = "${header}"></p>
+</header>
+<nav th:fragment="nav">
+    <a href="/"><span>Homepage</span></a>
+    <a href="/addlist"><span>Add a list</span></a>
+</nav>
+</body>
+</html>

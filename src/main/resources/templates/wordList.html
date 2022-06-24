@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title='wordlist')">
+    <meta charset="UTF-8">
+    <title>Strona główna</title>
+</head>
+<body>
+<header th:replace="fragments::header(header= 'Wordlist')"></header>
+<main class="container">
+    <nav th:replace="fragments::nav"></nav>
+    <p th:text="|Wordlist name: ${wordList.name}|"></p>
+    <p th:text="|Creation date: ${wordList.date}|"></p>
+    <form method="post" th:action="|/saveList/${wordList.id}|">
+        <table class="table my-table">
+            <thead>
+            <tr>
+                <th scope="col">Word</th>
+                <th scope="col">Wordtype</th>
+                <th scope="col">Definition</th>
+                <th scope="col">Sentence</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="entry: ${wordList.entries} ">
+                <td th:text="${entry.word.name}"></td>
+                <td>
+                    <div th:if="${entry.word.wordType}">
+                        <p th:text="${entry.word.wordType}"></p>
+                    </div>
+                    <div th:unless="${entry.word.wordType}">
+                        <p class="not-set">Edit entry to add properties</p>
+                    </div>
+                </td>
+                <td th:text="${entry?.word?.definition}"></td>
+                <td th:text="${entry?.userSentence?.content}"></td>
+                <td>
+                    <a th:href="|/wordType/set?id=${entry.id}|">edit</a>
+                </td>
+                <td>
+                    <a th:href="|wordList/${wordList.id}/entry/delete?id=${entry.id}|">delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <input value="save list" type="submit" class="btn btn-success submit-input">
+    </form>
+</main>
+</body>
+</html>

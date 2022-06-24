@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title='Strona główna')">
+    <meta charset="UTF-8">
+    <title>Strona główna</title>
+</head>
+<body>
+<header th:replace="fragments::header(header= 'WordListGenerator')"></header>
+<main class="container">
+    <nav th:replace="fragments::nav"></nav>
+    <p><strong>Your lists</strong></p>
+    <table class="table my-table">
+        <thead>
+        <tr>
+            <th scope="col">Wordlist name</th>
+            <th scope="col">Date</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="wordList: ${wordLists}">
+            <td th:text="${wordList.name}"></td>
+            <td th:text="${wordList.date}"></td>
+            <td>
+                <a th:href="|wordList?id=${wordList.id}|">edit</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

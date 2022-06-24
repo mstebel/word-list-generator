@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title='Single Entry')">
+    <meta charset="UTF-8">
+    <title>Strona główna</title>
+</head>
+<body>
+<header th:replace="fragments::header(header= 'Single Entry')"></header>
+<main class="container">
+    <nav th:replace="fragments::nav"></nav>
+    <form method="post" th:action="@{|/entry/{id}|}" th:object="${entry}">
+        <table class="table my-table">
+            <thead>
+            <tr>
+                <th scope="col">Word</th>
+                <th scope="col">Wordtype</th>
+                <th scope="col">Word definition</th>
+                <th scope="col">Sentence</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td >
+                    <div th:text="${entry.word.name}">
+                        <input th:value="${word.id}" type="hidden" th:field="*{word.id}">
+                        <input th:value= "${word.name}" type="hidden" th:field="*{word.name}">
+                    </div>
+                </td>
+                <td th:text="${entry.word.wordType}">
+                    <input th:value="${word.wordType}" type="hidden" th:field="*{word.wordType}">
+                </td>
+                <td th:text="${entry.word.definition}">
+                    <input th:value="${word.definition}" type="hidden" th:field="*{word.definition}">
+                </td>
+                <td th:text="${entry.userSentence.content}">
+                    <input th:value="${userSentence}" type="hidden" th:field="*{userSentence}">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <nav>
+            <a th:href="|/wordType/set?id=${entry.id}|">edit entry</a>
+            <a th:text="|show wordlist: ${wordList.name}|" th:href="|/wordList?id=${wordList.id}|"></a>
+        </nav>
+    </form>
+</main>
+</body>
+</html>

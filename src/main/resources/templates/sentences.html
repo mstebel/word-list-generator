@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title='addSentences')">
+    <meta charset="UTF-8">
+    <title>Definitions</title>
+</head>
+<body>
+<header th:replace="fragments::header(header= 'Add sentences')"></header>
+<main class="container">
+    <nav th:replace="fragments::nav"></nav>
+    <form method="post" th:action="@{|/completeEntry/${entry.id}|}" th:object="${entry}">
+        <table class="table my-table">
+            <thead>
+            <tr>
+                <th scope="col">Word</th>
+                <th id="word-type-column" scope="col">Word-type</th>
+                <th scope="col">Word definition</th>
+                <th scope="col">Sentence</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:text="${entry.word.name}">
+                    <input th:value="${word.id}" type="hidden" th:field="*{word.id}">
+                    <input th:value="${word.name}" type="hidden" th:field="*{word.name}">
+                </td>
+                <td th:text="${entry.word.wordType}">
+                    <input th:value="${word.wordType}" type="hidden" th:field="*{word.wordType}">
+                </td>
+                <td th:text="${entry.word.definition}">
+                    <input th:value="${word.definition}" type="hidden" th:field="*{word.definition}">
+                </td>
+                <td>
+                    <label for="sentence-input"><strong>Your sentence</strong></label>
+                    <textarea required th:field="*{userSentence.content}" class="form-control"
+                                   placeholder="Write your own sentence here" id="sentence-input"></textarea>
+                    <input value="submit" type="submit" class="btn btn-success submit-input">
+                    <div th:unless = "${sentences.isEmpty()}">
+                        <p><strong>Choose a sentence from the list</strong></p>
+                    </div>
+                    <div th:each="sentence: ${sentences}" class="form-check">
+                        <input th:field="*{userSentence.content}" class="form-check-input" type="radio"
+                               name="flexRadioDefault" th:value="${sentence}" id="sentence" th:onclick="submit()">
+                        <label th:text="${sentence}" class="form-check-label" for="sentence"></label>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</main>
+</body>
+</html>
