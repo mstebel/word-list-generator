@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title='WordType')">
+    <meta charset="UTF-8">
+    <title>WordTypeForm</title>
+</head>
+<body>
+<header th:replace="fragments::header(header= 'WordTypeForm')"></header>
+<main class="container">
+    <nav th:replace="fragments::nav"></nav>
+        <table class="table my-table">
+            <thead>
+            <tr>
+                <th scope="col">Word</th>
+                <th scope="col">Set Word-type, definition & sentence</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="entry: ${userEntries} ">
+                    <td th:text="${entry.word.name}"></td>
+                    <td>
+                        <p th:text="${entry.word.wordType}"></p>
+                        <a th:href="|/wordType/set?id=${entry.id}|">set</a>
+                    </td>
+            </tr>
+            </tbody>
+        </table>
+</main>
+</body>
+</html>

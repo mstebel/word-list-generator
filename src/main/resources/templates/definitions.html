@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title='addDefinitions')">
+    <meta charset="UTF-8">
+    <title>Definitions</title>
+</head>
+<body>
+<header th:replace="fragments::header(header= 'Add definitions')"></header>
+<main class="container">
+    <nav th:replace="fragments::nav"></nav>
+    <form method="post" th:action="@{|/sentences/${entry.id}|}" th:object="${entry}">
+        <table class="table my-table">
+            <thead>
+            <tr>
+                <th scope="col">Word</th>
+                <th scope="col">Word Type</th>
+                <th scope="col">Word definition</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td  th:text="${entry.word.name}">
+                    <input th:value="${word.id}" type="hidden" th:field="*{word.id}">
+                    <input th:value= "${word.name}" type="hidden" th:field="*{word.name}">
+                </td>
+                <td th:text="${entry.word.wordType}">
+                    <input th:value="${word.wordType}" type="hidden" th:field="*{word.wordType}">
+                </td>
+                <td>
+                    <div th:unless = "${definitions.isEmpty()}">
+                        <p><strong>Choose a definition from the list</strong></p>
+                    </div>
+                    <div th:each="definition: ${definitions}" class="form-check">
+                        <input th:field="*{word.definition}" class="form-check-input" type="radio"
+                               name="flexRadioDefault" th:value="${definition}" id="definition" th:onclick="submit()">
+                        <label th:text="${definition}" class="form-check-label" for="definition"></label>
+                    </div>
+                        <label for="definition-input"><strong>Your definition</strong></label>
+                        <textarea required th:field="*{word.definition}" class="form-control"
+                                  placeholder="Write your own definition here" id="definition-input"></textarea>
+                        <input value="submit" type="submit" class="btn btn-success submit-input">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</main>
+</body>
+</html>
